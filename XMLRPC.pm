@@ -1,4 +1,4 @@
-# $Id: XMLRPC.pm,v 1.1.1.1 2003/03/20 17:05:13 mah Exp $
+# $Id: XMLRPC.pm,v 1.4 2003/03/20 23:26:02 mah Exp $
 # License and documentation are after __END__.
 
 package POE::Component::Server::XMLRPC;
@@ -8,7 +8,7 @@ use strict;
 use Carp qw(croak);
 
 use vars qw($VERSION);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use POE;
 use POE::Component::Server::HTTP;
@@ -206,7 +206,7 @@ __END__
 
 =head1 NAME
 
-POE::Component::Server::XMLRPC - publish POE event handlers via SOAP over HTTP
+POE::Component::Server::XMLRPC - publish POE event handlers via XMLRPC over HTTP
 
 =head1 SYNOPSIS
 
@@ -279,7 +279,7 @@ which returns its parameters to the client as a XMLRPC response.
     while (@{$params})
       $sum += $value;
     }
-    $soap_transaction->return("Thanks.  Sum is: $sum");
+    $transaction->return("Thanks.  Sum is: $sum");
   }
 
 And here is a sample XMLRPC::Lite client.  It should work with the
@@ -301,7 +301,9 @@ server in the SYNOPSIS.
 
 =head1 BUGS
 
-This project is a modified version of POE::Component::Server::SOAP by Rocco Caputo.  Of that, he writes:
+This project is a modified version of
+POE::Component::Server::SOAP by Rocco Caputo.  Of that, he
+writes:
 
   This project was created over the course of two days, which attests to
   the ease of writing new POE components.  However, I did not learn XMLRPC
