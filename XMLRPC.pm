@@ -8,7 +8,7 @@ use strict;
 use Carp qw(croak);
 
 use vars qw($VERSION);
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use POE;
 use POE::Component::Server::HTTP;
@@ -168,7 +168,7 @@ sub TR_SESSION  () { 1 }
 sub TR_EVENT    () { 2 }
 sub TR_ARGS     () { 3 }
 
- start {
+sub start {
   my ($type, $response, $session, $event, $args) = @_;
 
   my $self = bless

@@ -11,14 +11,14 @@ use constant ping_urls => qw(http://rpc.weblogs.com/RPC2
 			     http://rpc.blogrolling.com/pinger/);
 my $setup = sub {
   my $kernel = $_[KERNEL];
-  $kernel->alias_set("service");
-  $kernel->post( xmlrpc => publish => service => "weblogUpdates.ping" );
+  $kernel->alias_set("pinger");
+  $kernel->post( xmlrpc => publish => pinger => "weblogUpdates.ping" );
   openlog("ping-server", qw(pid nowait), "local1");
   $SIG{__WARN__} = sub {syslog("warning", join("", @_))};
 };
 
 my $shutdown = sub {
-  $_[KERNEL]->post( xmlrpc => rescind => service => "weblogUpdates.ping" );
+  $_[KERNEL]->post( xmlrpc => rescind => pinger => "weblogUpdates.ping" );
   closelog();
 };
 
@@ -51,7 +51,7 @@ my $ping = sub {
 };
 
 POE::Component::Server::XMLRPC->new(alias => "xmlrpc",
-					    port  => 42042 );
+				    port  => 42042 );
 
 POE::Session->create
   ( inline_states =>
